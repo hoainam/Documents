@@ -2,6 +2,7 @@
 
 ## Listening for changes to your model ##
 If you want to receive a notification when a Backbone model changes you can bind a listener to the model for its change event. A convenient place to add listeners is in the `initialize()` function.
+> Nếu bạn muốn nhận một thông báo khi một Backbone model thay đổi , bạn có thể rằng buộc một listener đến model cho sự kiện thay đổi  của nó. Địa điểm thích hợp nhất để thêm listener là trong function `initialize()`.
 
 You can also listen for change to individual attributes in a Backbone model. In the following example, we can a message whenever a specific attribute (the title of our Todo model) is altered.
 
@@ -224,3 +225,13 @@ console.log(view.$('a b').html()); // outputs "test"
 </body>
 </html>
 ```
+The `_.template` method in Underscore compiles Javascript templates into function which can be evaluated for rendering. in the TodoView, I'm passing the marking from the template with id `item-template` to `_.template()` to be compiled and stored in the todoTpl property when the view is created.
+
+The `render()` method uses this template by passing it the `toJSON()` encoding of the attributes of the model associated with the view. The template returns its markup after using the model's title and completed flag to evaluate the expressions containing them. I then set this markup as the HTML content of the `el` DOM element using the `$el`property.
+
+This populates the template, giving you a data-complete set of markup in just a few short lines of code.
+
+
+A common Backbone convention is to return `this` at the end of `render()`. This is useful for a number of reasons, including:
+  * Making views easily reusable in other parent views.
+  * Creating a list of elements without rendering and painting each of them individually, only to be drawn once the entire list is populated.
