@@ -126,3 +126,41 @@ console.log(todoView.el); // logs <li></li>
 ```
 ### What is el? ###
 `el` is basically a reference to a DOM element and all views must have one. Views can use `el` to compose their element's content and then insert it into the DOM all at once, which makes for faster rendering because the browser performs the minimum required number of reflows and repaints.
+
+There are two ways to associate a DOM element with a view: a new element can be created for the view and subsequently added to the DOM or a reference can be made to an element which already exists in the page.
+
+If you want to create a new element for your view, set any combination of the following properties on the view: `tagName`, `id`, and `className`. A new element will be created for you by the framework and a reference to it will be available at the `el` property. If nothing is specified `tagName` defaults to `div`.
+
+In the example above, `tagName` is set to 'li', resulting in creation of an li element. The following example creates a ul element with id and class attributes
+```javascript
+var TodosView = Backbone.View.extend({
+  tagName: 'ul', // required, but defaults to 'div' if not set
+  className: 'container', // optional, you can assign multiple classes to
+                          // this property like so: 'container homepage'
+  id: 'todos' // optional
+});
+
+var todosView = new TodosView();
+console.log(todosView.el); // logs <ul id="todos" class="container"></ul>
+```
+The above code creates the DOM element below but doesn't append it to the DOM.
+```html
+<ul id="todos" class="container"></ul>
+```
+If the element already exists in the page, you can set `el` as a CSS selector that matches the element.
+```javascript
+el: '#footer'
+```
+Alternatively, you can set `el` to an existing element when creating the view:
+```javascript
+var todosView = new TodosView({el: $('#footer')});
+```
+Note: When declaring a View, `options`, `el`, `tagName`, `id` and `ClassName` may be defined as functions, if you want their values to be determined at runtine.
+
+### elennd() ###
+View logic often needs to invoke jQuery or Zepto functions on the `el` element and elements nested within it. Backbone makes it easy todo so by defining the `$el` function. The `view.$el` property is equivalent to `$(view.el)` and `view.$(selector)` is equivalent to `$(view.el).find(selector)`. In our TodoView example's render method, we see `this.$el` used to set the HTML of the element and `this.$()` used to find subelements of class 'edit'.
+
+### setElement ###
+If you need to apply an existing Backbone view to a different DOM element `setElement` can be used for this purpose. Overriding this.el needs to both change the DOM reference and re-bind events to the new element(and unbind from the old).
+
+`setElement` will create a cached `$el` reference for you, moving the delegated events for a view from the old element to the new one.
