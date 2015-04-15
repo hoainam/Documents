@@ -164,3 +164,63 @@ View logic often needs to invoke jQuery or Zepto functions on the `el` element a
 If you need to apply an existing Backbone view to a different DOM element `setElement` can be used for this purpose. Overriding this.el needs to both change the DOM reference and re-bind events to the new element(and unbind from the old).
 
 `setElement` will create a cached `$el` reference for you, moving the delegated events for a view from the old element to the new one.
+```javascript
+// We create two DOM elements representing buttons
+// which could easily be containers or something else
+var button1 = $('<button></button>');
+var button2 = $('<button></button>');
+
+// Define a new view
+var View = Backbone.View.extend({
+      events: {
+        click: function(e) {
+          console.log(view.el === e.target);
+        }
+      }
+    });
+
+// Create a new instance of the view, applying it
+// to button1
+var view = new View({el: button1});
+
+// Apply the view to button2 using setElement
+view.setElement(button2);
+
+button1.trigger('click');
+button2.trigger('click'); // returns true
+```
+The `el` property represents the markup portion of the view that will be rendered; to get the view to actually render to the page, you need to add it as a new element or apprend it to an existing element.
+
+```javascript
+// We can also provide raw markup to setElement
+// as follows (just to demonstrate it can be done):
+var view = new Backbone.View;
+view.setElement('<p><a><b>test</b></a></p>');
+console.log(view.$('a b').html()); // outputs "test"
+```
+### Understanding `render()` ###
+`render()` is an optional function that defines the logic for rendering a template. We'll use Underscore's micro-templating in these examples, but remember you can use other templating framerworks if you prefer. Our example will reference the following HTML markup:
+```html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+</head>
+<body>
+  <div id="todo">
+  </div>
+  <script type="text/template" id="item-template">
+    <div>
+      <input id="todo_complete" type="checkbox" <%= completed ? 'checked="checked"' : '' %>>
+      <%= title %>
+    </div>
+  </script>
+  <script src="underscore-min.js"></script>
+  <script src="backbone-min.js"></script>
+  <script src="jquery-min.js"></script>
+  <script src="example.js"></script>
+</body>
+</html>
+```
