@@ -44,6 +44,7 @@ Validation function can be as simple or complex as necessary. If the attributes 
 Should an error be returned:
   * An `invalid` event will be triggered, setting the `validationError` property on the model with the value which is returned by this method.
   * `.save()` will not continue and the attributes of the model will not be modified on the server.
+
 >Lỗi trả về:
  * Một sự kiện `invalid` sẽ gây ra. thiết lập thuộc tính `validationError` trên model với giá trị mà phương thức trả về.
  * `.save()` sẽ không tiếp tục và các thuộc tính của model sẽ không thay đổi trên server.
@@ -73,6 +74,7 @@ var Todo = Backbone.Model.extend({
     console.log('completed: ' + myTodo.get('completed')); // completed: false
 ```
 Note: the attributes object passed to the validate function represents what the attributes would be after completing the current `set()` or `save()`. This object is distinct from the current attributes of the model and from the parameters passed to the operation. Since it is created by shallow copy, it is not possible to change any Number, String, or Boolean attribute of the input within the function, but it is possible to change attributes in nested objects.
+>
 
 An example of this (by @fivetanley) is available here.
 
