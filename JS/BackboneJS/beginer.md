@@ -72,11 +72,13 @@ var Todo = Backbone.Model.extend({
     console.log('completed: ' + myTodo.get('completed')); // completed: false
 ```
 Note: the attributes object passed to the validate function represents what the attributes would be after completing the current `set()` or `save()`. This object is distinct from the current attributes of the model and from the parameters passed to the operation. Since it is created by shallow copy, it is not possible to change any Number, String, or Boolean attribute of the input within the function, but it is possible to change attributes in nested objects.
->Chú ý: Các thuộc tính đối tượng được truyền qua hàm validate miêu tả cho những gì các thuộc tính sẽ thay đổi
+>Chú ý: Các thuộc tính đối tượng được truyền qua hàm validate miêu tả cho những gì các thuộc tính sau khi hoàn thành các thiết lập hiện tại `set()` or `save()`. Đối tượng này là khác biết đối với các thuộc tính hiện tại của model và từ các parameters được truyền cho các phép toán.
+Kể từ khi nó được tạo ra bỏi các bản copy hời hợt, nó không thể thay đổi bất kỳ thuộc Number, String hoặc Boolean của đầu vào trong phạm vi function, nhưng nó có thể thay đổi các thuộc tính trong đối tượng lồng nhau.
 
 An example of this (by @fivetanley) is available [here](http://jsfiddle.net/2NdDY/270/).
 
 Note also, that validation on initialization is possible but of limited use, as the object being constructed is internally marked invalid but nevertheless passed back to the caller (continuing the above example):
+>Cũng lưu ý, rằng validation trên initialization  là cố thể nhưng cần hạn chế sử dụng, như các đối tượng đang được xây dựng là nội bộ đánh dấu không hợp lệ nhưng vẫn qua lại với người gọi.
 
 ```javascript
 var emptyTodo = new Todo(null, {validate: true});
@@ -84,10 +86,11 @@ console.log(emptyTodo.validationError);
 ```
 ## Views ##
 Views in Backbone don't contain the HTML markup for your application; they contain the logic behind the presentation of the model's data to the user. This is usually achieved using JavaScript templating (e.g., Underscore, Microtemplates, Mustachem jQuery-templ, ect.). A view's `render()` method can be bound to a model's `change()` event, enabling the view to instantly reflect model changes without requiring a full page refresh.
-
+> Views trong Backbone không chứ đựng HTML markup for ứng ựng của bạn, chúng chứa các logic đằng sau việc trình bày các dữ liệu của model cho người dùng. Điều này thường được thực hiện bằng các sử dụng JavaScript templating (e.g., Underscore, Microtemplates, Mustachem,jQuery-templ, ect.).Phương thức `render()` của một view cos thể bị rằng buộc tới một sự kiện `change()` của model, cho phép người xem có thể phản ánh ngay lập tức thay đổi model mà không cần làm mới lại trang.
 
 ### Creating new views ###
 Creating a new view is relatively straightforward and similar to creating new models. To create a new View, simply extend `Backbone.View`. We introduced the sample TodoView below in the previous chapter; now let's take a closer look at how it works:
+>Tạo một view mới tương đối dễ dãng và giống như tạo mới models. Để tạo một View mới , đơn giản cần extend `Backbone.View`.
 
 ```javascript
 var TodoView = Backbone.View.extend({
@@ -137,8 +140,10 @@ console.log(todoView.el); // logs <li></li>
 ```
 ### What is el? ###
 `el` is basically a reference to a DOM element and all views must have one. Views can use `el` to compose their element's content and then insert it into the DOM all at once, which makes for faster rendering because the browser performs the minimum required number of reflows and repaints.
+>`el` đơn giản là một tham chiếu tới một phần từ DOM và tất cả view có một cái. Views có thể sử dụng `el` để soạn nội dung các phần từ của chúng và sau đó chèn nó vào DOM tất cả một lần, nó làm cho việc render nhanh hơn bởi vì trình duyệt thi hành số yêu cầu  nhỏ  nhất bằng reflows và repaints.
 
 There are two ways to associate a DOM element with a view: a new element can be created for the view and subsequently added to the DOM or a reference can be made to an element which already exists in the page.
+>Đó là 2 cách để kết hợp một phần từ DOM với một view: một phần từ mới có thể đã được tạo cho view và sau đó đã được thêm vào DOM hoặc một tham chiếu có thể thực hiện tới một phần tử mà đã tồn tại rồi trong trang. 
 
 If you want to create a new element for your view, set any combination of the following properties on the view: `tagName`, `id`, and `className`. A new element will be created for you by the framework and a reference to it will be available at the `el` property. If nothing is specified `tagName` defaults to `div`.
 
