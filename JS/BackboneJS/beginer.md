@@ -10,7 +10,9 @@ You can also listen for change to individual attributes in a Backbone model. In 
 ## Validation
 Backbone supports model validation through `model.validate()`, which allows checking the attribute values for a model prior to setting them. By default, validation occurs when the model is persisted using the `save()` method or when `set()` is called if `{validate:true}` is passed as an argument.
 
->Backbone hỗ trợ model validation thông qua `model.validate()`, Nó cho phép kiểm tra giá trị của thuộc tính cho một model trước khi cài đặt chúng.
+>Backbone hỗ trợ model validation thông qua `model.validate()`, Nó cho phép kiểm tra giá trị của thuộc tính cho một model trước khi cài đặt chúng. Mặc định, validation xảy ra khi model
+
+Theo mặc định, xác nhận xảy ra khi mô hình được tiếp tục tồn tại bằng cách sử dụng tiết kiệm () phương pháp hoặc khi thiết lập () được gọi là nếu {validate: true} được thông qua như là một đối số
 
 ```javascript
 var Person = new Backbone.Model({name: 'Jeremy'});
@@ -34,8 +36,10 @@ Person.unset('name', {validate: true});
 
 
 Above, we also use the `unset()` method, which removes an attribute by deleting it from the internal model attribute hash.
+>Ở trên, chúng ta cũng sử dụng phương thức `unset()`, nó removes một thuộc tính bằng cách xóa it từ
 
 Validation function can be as simple or complex as necessary. If the attributes provided are valid, nothing should be returned from `.validate()`. If they are invalid, and error value should be returned instead.
+>Hàm validation có thể đơn giản hoặc phức tạp khi cần thiết. Nếu các thuộc tính được cung cấp là hợp lệ, không có bất cứ sự trả về nào từ `.validate()`. Nếu chúng không hợp lệ, một giá trị lỗi nên được trả về để thay thế.
 
 Should an error be returned:
   * An `invalid` event will be triggered, setting the `validationError` property on the model with the value which is returned by this method.
