@@ -43,7 +43,10 @@ Validation function can be as simple or complex as necessary. If the attributes 
 
 Should an error be returned:
   * An `invalid` event will be triggered, setting the `validationError` property on the model with the value which is returned by this method.
-  * `.save()` will not continue and the attribute and the attributes of the model will not be modified on the server.
+  * `.save()` will not continue and the attributes of the model will not be modified on the server.
+>Lỗi trả về:
+ * Một sự kiện `invalid` sẽ gây ra. thiết lập thuộc tính `validationError` trên model với giá trị mà phương thức trả về.
+ * `.save()` sẽ không tiếp tục và các thuộc tính của model sẽ không thay đổi trên server.
 
 A more complete validation example can be seen below
 
