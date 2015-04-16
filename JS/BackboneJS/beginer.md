@@ -5,9 +5,12 @@ If you want to receive a notification when a Backbone model changes you can bind
 > Nếu bạn muốn nhận một thông báo khi một Backbone model thay đổi , bạn có thể rằng buộc một listener đến model cho sự kiện thay đổi  của nó. Địa điểm thích hợp nhất để thêm listener là trong function `initialize()`.
 
 You can also listen for change to individual attributes in a Backbone model. In the following example, we can a message whenever a specific attribute (the title of our Todo model) is altered.
+>Bạn cũng có thể lắng nghe để thay đổi thuộc tính riêng biệt trong một Backbone Model. Chúng ta có thể có thông báo khi bất cứ một thuộc tính nào được thay đổi.
 
 ## Validation
-Backbone supports model validation through `model.validate()`, which allows checking the attribute values for a model prior to setting them. By default, validation occurs when the model is persisted using the `save()` method or when `set()` is called if `{validate:true}` is passed as an argument.  
+Backbone supports model validation through `model.validate()`, which allows checking the attribute values for a model prior to setting them. By default, validation occurs when the model is persisted using the `save()` method or when `set()` is called if `{validate:true}` is passed as an argument.
+
+>Backbone hỗ trợ model validation thông qua `model.validate()`, Nó cho phép kiểm tra giá trị của thuộc tính cho một model trước khi cài đặt chúng.
 
 ```javascript
 var Person = new Backbone.Model({name: 'Jeremy'});
