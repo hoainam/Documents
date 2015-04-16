@@ -10,9 +10,7 @@ You can also listen for change to individual attributes in a Backbone model. In 
 ## Validation
 Backbone supports model validation through `model.validate()`, which allows checking the attribute values for a model prior to setting them. By default, validation occurs when the model is persisted using the `save()` method or when `set()` is called if `{validate:true}` is passed as an argument.
 
->Backbone hỗ trợ model validation thông qua `model.validate()`, Nó cho phép kiểm tra giá trị của thuộc tính cho một model trước khi cài đặt chúng. Mặc định, validation xảy ra khi model
-
-Theo mặc định, xác nhận xảy ra khi mô hình được tiếp tục tồn tại bằng cách sử dụng tiết kiệm () phương pháp hoặc khi thiết lập () được gọi là nếu {validate: true} được thông qua như là một đối số
+>Backbone hỗ trợ model validation thông qua `model.validate()`, Nó cho phép kiểm tra giá trị của thuộc tính cho một model trước khi cài đặt chúng. Mặc định, validation xảy ra khi model cố chấp sử dụng  phương thức `save()` hoặc khi  `set()` được gọi nếu `validate:true` được thông qua như một đối số.
 
 ```javascript
 var Person = new Backbone.Model({name: 'Jeremy'});
@@ -74,9 +72,9 @@ var Todo = Backbone.Model.extend({
     console.log('completed: ' + myTodo.get('completed')); // completed: false
 ```
 Note: the attributes object passed to the validate function represents what the attributes would be after completing the current `set()` or `save()`. This object is distinct from the current attributes of the model and from the parameters passed to the operation. Since it is created by shallow copy, it is not possible to change any Number, String, or Boolean attribute of the input within the function, but it is possible to change attributes in nested objects.
->
+>Chú ý: Các thuộc tính đối tượng được truyền qua hàm validate miêu tả cho những gì các thuộc tính sẽ thay đổi
 
-An example of this (by @fivetanley) is available here.
+An example of this (by @fivetanley) is available [here](http://jsfiddle.net/2NdDY/270/).
 
 Note also, that validation on initialization is possible but of limited use, as the object being constructed is internally marked invalid but nevertheless passed back to the caller (continuing the above example):
 
